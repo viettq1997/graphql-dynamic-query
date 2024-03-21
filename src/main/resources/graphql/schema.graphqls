@@ -1,0 +1,46 @@
+scalar Date
+
+type Query {
+    getStudentById(id: ID): Student
+    getStudentByFilter(filter: Filter): Student
+}
+
+type Student {
+    id: ID!
+    age: Int
+    dob: Date
+    email: String
+    name: String
+}
+
+input Filter {
+    field: String
+    operator: QueryOperator
+    values: [FilterValue]
+    and: [Filter]
+    or: [Filter]
+}
+
+enum QueryOperator {
+    EQ
+    NE
+    GT
+    LT
+    GOE
+    LOE
+    LIKE
+    IN
+    NOT_IN
+}
+
+input FilterValue {
+    value: String
+    type: ValueType
+}
+
+enum ValueType {
+    LONG
+    STRING
+    DATE
+    LOCAL_DATE_TIME
+}
